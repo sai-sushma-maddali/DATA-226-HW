@@ -9,10 +9,10 @@ import requests
 
 def return_snowflake_conn():
 
-    # Initialize the SnowflakeHook
+    # Initialize SnowflakeHook
     hook = SnowflakeHook(snowflake_conn_id='snowflake_conn')
     
-    # Execute the query and fetch results
+    # Execute the query to fetch results
     conn = hook.get_conn()
     return conn.cursor()
 
@@ -25,8 +25,8 @@ def extract_data():
         url = f'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey={alpha_vantage_key}'
         r = requests.get(url)
         data = r.json()
-        results = [] # empyt list for now to hold the 90 days of stock info (open, high, low, close, volume)
-        for d in data["Time Series (Daily)"]: # here d is a date: "YYYY-MM-DD"
+        results = [] # empyt list to hold  90 days of stock info (open, high, low, close, volume)
+        for d in data["Time Series (Daily)"]: # d is a date: "YYYY-MM-DD"
             stock_info = data["Time Series (Daily)"][d]
             stock_info["date"] = d
             results.append(stock_info)
@@ -98,7 +98,7 @@ with DAG(
     start_date = datetime(2025, 10, 1),
     catchup = False,
     tags = ['ETL'],
-    schedule = '*/15 * * * *' # schedule to run daily at 15 mins
+    schedule = '*/15 * * * *' # schedule to run every 15 mins
 )as dag:
     price_list = extract_data()
     execute_pipeline(price_list)
