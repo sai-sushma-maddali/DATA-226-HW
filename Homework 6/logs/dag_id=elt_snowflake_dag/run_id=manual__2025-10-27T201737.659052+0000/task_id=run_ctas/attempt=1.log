@@ -1,0 +1,159 @@
+[2025-10-27T20:17:40.032+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-10-27T20:17:40.042+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: elt_snowflake_dag.run_ctas manual__2025-10-27T20:17:37.659052+00:00 [queued]>
+[2025-10-27T20:17:40.048+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: elt_snowflake_dag.run_ctas manual__2025-10-27T20:17:37.659052+00:00 [queued]>
+[2025-10-27T20:17:40.049+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 1
+[2025-10-27T20:17:40.058+0000] {taskinstance.py:2888} INFO - Executing <Task(_PythonDecoratedOperator): run_ctas> on 2025-10-27 20:17:37.659052+00:00
+[2025-10-27T20:17:40.065+0000] {logging_mixin.py:190} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70 DeprecationWarning: This process (pid=1404) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-10-27T20:17:40.066+0000] {standard_task_runner.py:72} INFO - Started process 1410 to run task
+[2025-10-27T20:17:40.066+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'elt_snowflake_dag', 'run_ctas', 'manual__2025-10-27T20:17:37.659052+00:00', '--job-id', '44', '--raw', '--subdir', 'DAGS_FOLDER/elt_snowflake.py', '--cfg-path', '/tmp/tmppt1uusmp']
+[2025-10-27T20:17:40.068+0000] {standard_task_runner.py:105} INFO - Job 44: Subtask run_ctas
+[2025-10-27T20:17:40.100+0000] {task_command.py:467} INFO - Running <TaskInstance: elt_snowflake_dag.run_ctas manual__2025-10-27T20:17:37.659052+00:00 [running]> on host 544e05e108c7
+[2025-10-27T20:17:40.155+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='elt_snowflake_dag' AIRFLOW_CTX_TASK_ID='run_ctas' AIRFLOW_CTX_EXECUTION_DATE='2025-10-27T20:17:37.659052+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-10-27T20:17:37.659052+00:00'
+[2025-10-27T20:17:40.156+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-10-27T20:17:40.159+0000] {elt_snowflake.py:26} INFO - session_summary
+[2025-10-27T20:17:40.160+0000] {elt_snowflake.py:27} INFO - SELECT u.*, s.ts
+    FROM raw.user_session_channel u
+    JOIN raw.session_timestamp s ON u.sessionId=s.sessionId
+    
+[2025-10-27T20:17:40.167+0000] {base.py:84} INFO - Retrieving connection 'snowflake_conn'
+[2025-10-27T20:17:40.169+0000] {connection.py:413} INFO - Snowflake Connector for Python Version: 3.12.1, Python Version: 3.12.5, Platform: Linux-5.15.167.4-microsoft-standard-WSL2-x86_64-with-glibc2.36
+[2025-10-27T20:17:40.170+0000] {connection.py:1196} INFO - Connecting to GLOBAL Snowflake domain
+[2025-10-27T20:17:40.170+0000] {connection.py:1277} INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+[2025-10-27T20:17:40.446+0000] {elt_snowflake.py:33} INFO - CREATE OR REPLACE TABLE analytics.temp_session_summary AS SELECT u.*, s.ts
+    FROM raw.user_session_channel u
+    JOIN raw.session_timestamp s ON u.sessionId=s.sessionId
+    
+[2025-10-27T20:17:42.130+0000] {cursor.py:1156} INFO - Number of results in first chunk: 1
+[2025-10-27T20:17:42.131+0000] {logging_mixin.py:190} INFO - 
+              SELECT sessionId, COUNT(1) AS cnt 
+              FROM analytics.temp_session_summary
+              GROUP BY 1
+              ORDER BY 2 DESC
+              LIMIT 1
+[2025-10-27T20:17:42.615+0000] {cursor.py:1156} INFO - Number of results in first chunk: 1
+[2025-10-27T20:17:42.617+0000] {logging_mixin.py:190} INFO - ('0a54b19a13b6712dc04d1b49215423d8', 1) 1
+[2025-10-27T20:17:42.617+0000] {elt_snowflake.py:58} INFO - Duplicate check SQL:
+
+            SELECT COUNT(*) AS total_rows,
+                   COUNT(DISTINCT *) AS distinct_rows
+            FROM analytics.temp_session_summary
+        
+[2025-10-27T20:17:42.742+0000] {taskinstance.py:3310} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/decorators/base.py", line 266, in execute
+    return_value = super().execute(context)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/elt_snowflake.py", line 59, in run_ctas
+    cur.execute(dup_check_sql)
+  File "/home/airflow/.local/lib/python3.12/site-packages/snowflake/connector/cursor.py", line 1087, in execute
+    Error.errorhandler_wrapper(self.connection, self, error_class, errvalue)
+  File "/home/airflow/.local/lib/python3.12/site-packages/snowflake/connector/errors.py", line 284, in errorhandler_wrapper
+    handed_over = Error.hand_to_other_handler(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/snowflake/connector/errors.py", line 339, in hand_to_other_handler
+    cursor.errorhandler(connection, cursor, error_class, error_value)
+  File "/home/airflow/.local/lib/python3.12/site-packages/snowflake/connector/errors.py", line 215, in default_errorhandler
+    raise error_class(
+snowflake.connector.errors.ProgrammingError: 000002 (0A000): 01bfff41-0206-c527-000f-c0df005672d2: Unsupported feature 'TOK_STAR'.
+[2025-10-27T20:17:42.749+0000] {taskinstance.py:1225} INFO - Marking task as FAILED. dag_id=elt_snowflake_dag, task_id=run_ctas, run_id=manual__2025-10-27T20:17:37.659052+00:00, execution_date=20251027T201737, start_date=20251027T201740, end_date=20251027T201742
+[2025-10-27T20:17:42.757+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-10-27T20:17:42.758+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 44 for task run_ctas (000002 (0A000): 01bfff41-0206-c527-000f-c0df005672d2: Unsupported feature 'TOK_STAR'.; 1410)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 115, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3004, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3158, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3182, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/decorators/base.py", line 266, in execute
+    return_value = super().execute(context)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/elt_snowflake.py", line 59, in run_ctas
+    cur.execute(dup_check_sql)
+  File "/home/airflow/.local/lib/python3.12/site-packages/snowflake/connector/cursor.py", line 1087, in execute
+    Error.errorhandler_wrapper(self.connection, self, error_class, errvalue)
+  File "/home/airflow/.local/lib/python3.12/site-packages/snowflake/connector/errors.py", line 284, in errorhandler_wrapper
+    handed_over = Error.hand_to_other_handler(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/snowflake/connector/errors.py", line 339, in hand_to_other_handler
+    cursor.errorhandler(connection, cursor, error_class, error_value)
+  File "/home/airflow/.local/lib/python3.12/site-packages/snowflake/connector/errors.py", line 215, in default_errorhandler
+    raise error_class(
+snowflake.connector.errors.ProgrammingError: 000002 (0A000): 01bfff41-0206-c527-000f-c0df005672d2: Unsupported feature 'TOK_STAR'.
+[2025-10-27T20:17:42.767+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2025-10-27T20:17:42.777+0000] {taskinstance.py:3900} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-10-27T20:17:42.778+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

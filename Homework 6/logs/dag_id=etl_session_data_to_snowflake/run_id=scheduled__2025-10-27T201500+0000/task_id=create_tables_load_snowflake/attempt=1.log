@@ -1,0 +1,26 @@
+[2025-10-27T20:30:01.846+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-10-27T20:30:01.858+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_session_data_to_snowflake.create_tables_load_snowflake scheduled__2025-10-27T20:15:00+00:00 [queued]>
+[2025-10-27T20:30:01.863+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_session_data_to_snowflake.create_tables_load_snowflake scheduled__2025-10-27T20:15:00+00:00 [queued]>
+[2025-10-27T20:30:01.863+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 1
+[2025-10-27T20:30:01.871+0000] {taskinstance.py:2888} INFO - Executing <Task(_PythonDecoratedOperator): create_tables_load_snowflake> on 2025-10-27 20:15:00+00:00
+[2025-10-27T20:30:01.880+0000] {logging_mixin.py:190} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70 DeprecationWarning: This process (pid=1804) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-10-27T20:30:01.880+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'etl_session_data_to_snowflake', 'create_tables_load_snowflake', 'scheduled__2025-10-27T20:15:00+00:00', '--job-id', '46', '--raw', '--subdir', 'DAGS_FOLDER/session_data_to_snowflake.py', '--cfg-path', '/tmp/tmp64kyk9xn']
+[2025-10-27T20:30:01.881+0000] {standard_task_runner.py:72} INFO - Started process 1807 to run task
+[2025-10-27T20:30:01.881+0000] {standard_task_runner.py:105} INFO - Job 46: Subtask create_tables_load_snowflake
+[2025-10-27T20:30:01.918+0000] {task_command.py:467} INFO - Running <TaskInstance: etl_session_data_to_snowflake.create_tables_load_snowflake scheduled__2025-10-27T20:15:00+00:00 [running]> on host 544e05e108c7
+[2025-10-27T20:30:01.971+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='etl_session_data_to_snowflake' AIRFLOW_CTX_TASK_ID='create_tables_load_snowflake' AIRFLOW_CTX_EXECUTION_DATE='2025-10-27T20:15:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-10-27T20:15:00+00:00'
+[2025-10-27T20:30:01.973+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-10-27T20:30:02.223+0000] {cursor.py:1156} INFO - Number of results in first chunk: 1
+[2025-10-27T20:30:02.348+0000] {cursor.py:1156} INFO - Number of results in first chunk: 1
+[2025-10-27T20:30:02.476+0000] {cursor.py:1156} INFO - Number of results in first chunk: 1
+[2025-10-27T20:30:02.733+0000] {cursor.py:1156} INFO - Number of results in first chunk: 1
+[2025-10-27T20:30:04.307+0000] {cursor.py:1156} INFO - Number of results in first chunk: 1
+[2025-10-27T20:30:05.007+0000] {cursor.py:1156} INFO - Number of results in first chunk: 1
+[2025-10-27T20:30:05.250+0000] {cursor.py:1156} INFO - Number of results in first chunk: 1
+[2025-10-27T20:30:05.251+0000] {logging_mixin.py:190} INFO - Data loaded successfully into Snowflake tables.
+[2025-10-27T20:30:05.251+0000] {python.py:240} INFO - Done. Returned value was: None
+[2025-10-27T20:30:05.259+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-10-27T20:30:05.260+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=etl_session_data_to_snowflake, task_id=create_tables_load_snowflake, run_id=scheduled__2025-10-27T20:15:00+00:00, execution_date=20251027T201500, start_date=20251027T203001, end_date=20251027T203005
+[2025-10-27T20:30:05.305+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-10-27T20:30:05.315+0000] {taskinstance.py:3900} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-10-27T20:30:05.317+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
