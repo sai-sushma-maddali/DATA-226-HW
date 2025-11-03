@@ -1,7 +1,7 @@
 
 ---
 
-## README.md — DBT Project with Snowflake
+## DBT Project with Snowflake
 
 ### Project Overview
 
