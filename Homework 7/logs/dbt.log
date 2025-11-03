@@ -1,0 +1,29 @@
+[0m12:23:23.725337 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000029CF26D6ED0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000029CF2911490>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000029CEFA09430>]}
+
+
+============================== 12:23:23.732104 | 9d8d7e3a-168c-4bb9-973a-2cb20d2e0446 ==============================
+[0m12:23:23.732104 [info ] [MainThread]: Running with dbt=1.11.0-b3
+[0m12:23:23.732104 [debug] [MainThread]: running dbt with arguments {'profiles_dir': 'C:\\Users\\sushm\\.dbt', 'cache_selected_only': 'False', 'use_colors': 'True', 'write_json': 'True', 'log_format': 'default', 'warn_error': 'None', 'log_path': 'logs', 'partial_parse': 'True', 'static_parser': 'True', 'send_anonymous_usage_stats': 'True', 'indirect_selection': 'eager', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'fail_fast': 'False', 'use_experimental_parser': 'False', 'version_check': 'True', 'introspect': 'True', 'quiet': 'False', 'empty': 'None', 'log_cache_events': 'False', 'debug': 'False', 'no_print': 'None', 'invocation_command': 'dbt init build_mau', 'printer_width': '80', 'target_path': 'None'}
+[0m12:23:23.770802 [debug] [MainThread]: Starter project path: C:\Users\sushm\anaconda3\Lib\site-packages\dbt\include\starter_project
+[0m12:23:23.783440 [info ] [MainThread]: 
+Your new dbt project "build_mau" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m12:23:23.783440 [info ] [MainThread]: Setting up your profile.
+[0m12:24:28.033200 [info ] [MainThread]: Profile build_mau written to C:\Users\sushm\.dbt\profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+[0m12:24:28.033200 [debug] [MainThread]: Command `dbt init` succeeded at 12:24:28.033200 after 64.59 seconds
+[0m12:24:28.033200 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000029CF2AAD220>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000029CF4555220>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000029CF7128200>]}
+[0m12:24:28.033200 [debug] [MainThread]: Flushing usage events
+[0m12:24:28.768780 [debug] [MainThread]: An error was encountered while trying to flush usage events
